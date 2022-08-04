@@ -8,15 +8,15 @@ import {
 
 import TemplateDefault from './templates/Default'
 import Home from './pages/Home'
-import Users from './pages/Users'
+import Customers from './pages/Customers'
 
 function App() {
   return (
     <TemplateDefault>
       <Router>
         <Switch>
-          <Route path="/users">
-            <Users />
+          <Route path="/customers">
+            <Customers />
           </Route>
           <Route path="/">
             <Home />
