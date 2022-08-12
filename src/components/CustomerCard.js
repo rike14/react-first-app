@@ -1,14 +1,16 @@
-import React, {useState} from 'react'
+import React from 'react'
+import classNames from 'classnames'
 
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardActions from '@mui/material/CardActions'
-import Avatar from '@mui/material/Avatar'
-import IconButton from '@mui/material/IconButton'
+import {
+    Card,
+    CardHeader,
+    CardActions,
+    Avatar,
+    IconButton,
+} from '@mui/material'
 
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
-import { deepPurple, red } from '@mui/material/colors';
 
 
 const CustomerCard = ({
@@ -16,13 +18,14 @@ const CustomerCard = ({
     lastname,
     email,
     avatar,
+    className,
 }) => {
-    
+   
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card className={classNames(className)}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={avatar}>
+                    <Avatar  aria-label="recipe" src={avatar}>
                         R
                     </Avatar>
                 }
