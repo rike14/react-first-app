@@ -16,11 +16,13 @@ import ModalConfirm from './ModalConfirm'
 
 
 const CustomerCard = ({
+    id,
     name,
     lastname,
     email,
     avatar,
     className,
+    onRemoveCustomer,
 }) => {
     const [openModal, setOpenModal] = useState(false)
 
@@ -28,8 +30,9 @@ const CustomerCard = ({
         setOpenModal(!openModal)
     }
 
-    const handleConfirmModal = () => {
-        alert('teste')
+    const handleConfirmModal = id => {
+        onRemoveCustomer(id)
+        handleToggleOpenModal()
     }
 
     const handleRemoveCustomer = () => {
@@ -60,7 +63,7 @@ const CustomerCard = ({
             <ModalConfirm 
                 open={openModal}
                 onClose={handleToggleOpenModal}
-                onConfirm={handleConfirmModal}
+                onConfirm={() => handleConfirmModal(id)}
                 title="ARE YOU SURE DELETE THIS CUSTOMER?!"
             />
         </>
