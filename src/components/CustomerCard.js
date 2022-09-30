@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 
 import {
@@ -9,8 +9,10 @@ import {
     IconButton,
 } from '@mui/material'
 
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+
+import ModalConfirm from './ModalConfirm'
 
 
 const CustomerCard = ({
@@ -20,27 +22,48 @@ const CustomerCard = ({
     avatar,
     className,
 }) => {
+    const [openModal, setOpenModal] = useState(false)
+
+    const handleToggleOpenModal = () => {
+        setOpenModal(!openModal)
+    }
+
+    const handleConfirmModal = () => {
+        alert('teste')
+    }
+
+    const handleRemoveCustomer = () => {
+        handleToggleOpenModal()
+    }
    
     return (
-        <Card className={classNames(className)}>
-            <CardHeader
-                avatar={
-                    <Avatar  aria-label="recipe" src={avatar}>
-                        R
-                    </Avatar>
-                }
-                title={`${name} ${lastname}`}
-                subheader={email}
+        <>
+            <Card className={classNames(className)}>
+                <CardHeader
+                    avatar={
+                        <Avatar  aria-label="recipe" src={avatar}>
+                            R
+                        </Avatar>
+                    }
+                    title={`${name} ${lastname}`}
+                    subheader={email}
+                />
+                <CardActions disableSpacing>
+                    <IconButton aria-label="edit customer">
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton aria-label="remove customer" onClick={handleRemoveCustomer}>
+                        <DeleteIcon />
+                    </IconButton>
+                </CardActions>
+            </Card>
+            <ModalConfirm 
+                open={openModal}
+                onClose={handleToggleOpenModal}
+                onConfirm={handleConfirmModal}
+                title="ARE YOU SURE DELETE THIS CUSTOMER?!"
             />
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
-            </CardActions>
-        </Card>
+        </>
     );
 }
 
