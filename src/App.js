@@ -13,12 +13,16 @@ import TemplatePage from './templates/Page'
 import Home from './pages/Home'
 import CustomersList from './pages/customers/List'
 import CustomersRegister from './pages/customers/Register'
+import CustomersEdit from './pages/customers/Edit'
 
 function App() {
   return (
     <Router>
       <TemplateDefault>
         <Switch>
+          <Route path="/customers/edit/:id">
+            <TemplatePage title="Edit Customer" Component={CustomersEdit} />
+          </Route>
           <Route path="/customers/add">
             <TemplatePage title="Register Customer" Component={CustomersRegister} />
           </Route>

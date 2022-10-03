@@ -13,7 +13,7 @@ import {
     ListItemText,
 } from '@mui/material'
 
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
 
 import MenuIcon from '@mui/icons-material/Menu'
 import HomeIcon from '@mui/icons-material/Home'
