@@ -5,7 +5,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { deepPurple, red } from '@mui/material/colors';
 
 import App from './App';
-import './index.css';
 
 const theme = createTheme({
   palette: {
