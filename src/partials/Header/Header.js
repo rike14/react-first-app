@@ -23,7 +23,7 @@ import './Header.css'
 
 
 
-const Header = () => {
+const Header = ({ user }) => {
     const history = useHistory()
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -54,7 +54,12 @@ const Header = () => {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
                             Home
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {
+                            user.logged
+                            ? <Typography variant='h6'>{user.email}</Typography>
+                            : <Button color="inherit">Login</Button>
+
+                        }
                     </Toolbar>
                 </AppBar>
             </Box>

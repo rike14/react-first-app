@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
         <Switch>
-          <Route>
+          <Route path="/login">
             <TemplateClean title="Restrict Access" Component={Login} />
           </Route>
           <TemplateDefault>
