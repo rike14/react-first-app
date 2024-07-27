@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
-import { useParams, useHistory } from "react-router-dom"
-import axios from 'axios'
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
+import Skeleton from '@mui/material/Skeleton'
+import TextField from '@mui/material/TextField'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useParams } from "react-router-dom"
 
 
 import Toasty from '../../components/Toasty'
@@ -104,7 +105,6 @@ const Edit = () => {
             name: form.name.value,
             email: form.email.value,
         }).then((response) => {
-            console.log('ok', response)
             setIsLoading(false)
             setOpenToasty(newToastyState = {
                 open: true,
@@ -122,76 +122,87 @@ const Edit = () => {
                 }
 
             })
-            setTimeout(() => {
-                history.push('/customers')
-            }, 3000);
+            history.push('/customers')
             
         })
 
     }
 
     return (
-        <>
-            <Box
-                component="form"
-                sx={{
-                    marginTop: 2,
-                }}
-                autoComplete="off"
-            >
-                <TextField
-                    error={form.name.error}
-                    helperText={form.name.error ? form.name.helperText : ''}
-                    id="name"
-                    name="name"
-                    label="Your name"
-                    variant="standard"
-                    value={form.name.value}
-                    onChange={handleInputChange}
-                />
+        isLoading ? 
+            <Box>
+                <Skeleton variant="rectangular" height={100} width="15%" style={{marginTop: 15}} />
+                <Skeleton animation="wave" height={80} width="15%" />
             </Box>
-            <Box
-                component="form"
-                sx={{
-                    marginTop: 1,
-                }}
-                autoComplete="off"
-            >
-                <TextField
-                    error={form.email.error}
-                    helperText={form.email.error ? form.email.helperText : ''}
-                    id="email"
-                    name="email"
-                    label="Your email"
-                    variant="standard"
-                    value={form.email.value}
-                    onChange={handleInputChange}
-                />
-            </Box>
-            <Button
-                sx={{ marginTop: 2 }}
-                variant="contained"
-                onClick={handleRegisterButton}
-                disabled={isLoading}>
-                {
-                    isLoading ? <Box
-                        sx={{
-                            width: 54,
-                            height: 25,
-                        }}>
-                        <CircularProgress
-                            color="inherit"
-                            size="1.5rem"
-                        />
-                    </Box> : 'Save'
-                }
-            </Button>
-            <Toasty
-                open={openToasty.open}
-                severity={openToasty.severity}
-                text={openToasty.text}
-                onClose={() => setOpenToasty(openToasty.open = false)} />
-        </>
+              :
+            <>
+                <Box
+                    component="form"
+                    sx={{
+                        marginTop: 2,
+                    }}
+                    autoComplete="off"
+                    >
+                    <TextField
+                        error={form.name.error}
+                        helperText={form.name.error ? form.name.helperText : ''}
+                        id="name"
+                        name="name"
+                        label="Your name"
+                        variant="standard"
+                        value={form.name.value}
+                        onChange={handleInputChange}
+                    />
+                </Box>
+                <Box
+                    component="form"
+                    sx={{
+                        marginTop: 1,
+                    }}
+                    autoComplete="off"
+                >
+                    <TextField
+                        error={form.email.error}
+                        helperText={form.email.error ? form.email.helperText : ''}
+                        id="email"
+                        name="email"
+                        label="Your email"
+                        variant="standard"
+                        value={form.email.value}
+                        onChange={handleInputChange}
+                    />
+                </Box>
+                <Button
+                    sx={{ marginRight: 2, marginTop: 2 }}
+                    variant="contained"
+                    onClick={() => history.push('/customers')}
+                >
+                    Cancel
+                </Button>
+                <Button
+                    sx={{ marginTop: 2 }}
+                    variant="contained"
+                    onClick={handleRegisterButton}
+                    disabled={isLoading}>
+                    {
+                        isLoading ? <Box
+                            sx={{
+                                width: 54,
+                                height: 25,
+                            }}>
+                            <CircularProgress
+                                color="inherit"
+                                size="1.5rem"
+                            />
+                        </Box> : 'Save'
+                    }
+                </Button>
+                <Toasty
+                    open={openToasty.open}
+                    severity={openToasty.severity}
+                    text={openToasty.text}
+                    onClose={() => setOpenToasty(openToasty.open = false)} />
+            </>
     )
 }
 

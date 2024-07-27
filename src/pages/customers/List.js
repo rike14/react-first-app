@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import { useHistory } from "react-router-dom"
 import Grid from '@mui/material/Grid'
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 
 import CustomerCard from "../../components/CustomerCard"
 
@@ -36,7 +36,8 @@ const List = () => {
                 {
                     customers.map(customer => (
                         <Grid item xs={12} md={4} style={{ padding: 10 }}>        
-                            <CustomerCard 
+                            <CustomerCard
+                                key={customer.id} 
                                 id={customer.id}
                                 name={customer.first_name}
                                 lastname={customer.last_name}

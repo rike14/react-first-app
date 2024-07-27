@@ -1,12 +1,14 @@
-import { useState } from 'react'
-import axios from 'axios'
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress'
+import TextField from '@mui/material/TextField'
+import axios from 'axios'
+import { useState } from 'react'
 
 
+import { Skeleton } from '@mui/material'
 import Toasty from '../../components/Toasty'
+import CustomersList from './List'
 
 
 const Register = () => {
@@ -84,7 +86,6 @@ const Register = () => {
             name: form.name.value,
             email: form.email.value,
         }).then((response) => {
-            console.log('ok', response)
             setIsLoading(false)
             setOpenToasty(newToastyState = {
                 open: true,
@@ -107,66 +108,77 @@ const Register = () => {
     }
     
     return (
-        <>
-            <Box
-                component="form"
-                sx={{
-                   marginTop: 2,
-                }}
-                autoComplete="off"
-            >
-                <TextField 
-                    error={form.name.error}
-                    helperText={form.name.error ? form.name.helperText : ''}
-                    id="name" 
-                    name="name" 
-                    label="Your name" 
-                    variant="standard" 
-                    value={form.name.value} 
-                    onChange={handleInputChange}
-                />
+        isLoading ? 
+            <Box>
+                <Skeleton variant="rectangular" height={100} width="15%" style={{marginTop: 15}} />
+                <Skeleton animation="wave" height={80} width="15%" />
             </Box>
-            <Box
-                component="form"
-                sx={{
-                    marginTop: 1,
-                }}
-                autoComplete="off"
-            >
-                <TextField 
-                    error={form.email.error}
-                    helperText={form.email.error ? form.email.helperText : ''}
-                    id="email" 
-                    name="email"
-                    label="Your email" 
-                    variant="standard" 
-                    value={form.email.value} 
-                    onChange={handleInputChange} 
+            :
+            <>
+                <Box
+                    component="form"
+                    sx={{
+                    marginTop: 2,
+                    }}
+                    autoComplete="off"
+                >
+                    <TextField 
+                        error={form.name.error}
+                        helperText={form.name.error ? form.name.helperText : ''}
+                        id="name" 
+                        name="name" 
+                        label="Your name" 
+                        variant="standard" 
+                        value={form.name.value} 
+                        onChange={handleInputChange}
+                    />
+                </Box>
+                <Box
+                    component="form"
+                    sx={{
+                        marginTop: 1,
+                    }}
+                    autoComplete="off"
+                >
+                    <TextField 
+                        error={form.email.error}
+                        helperText={form.email.error ? form.email.helperText : ''}
+                        id="email" 
+                        name="email"
+                        label="Your email" 
+                        variant="standard" 
+                        value={form.email.value} 
+                        onChange={handleInputChange} 
+                    />
+                </Box>
+                <Button 
+                    sx={{marginTop: 2}}
+                    variant="contained" 
+                    onClick={handleRegisterButton} 
+                    disabled={isLoading}>
+                        {
+                        isLoading ? <Box 
+                                    sx={{width: 54,
+                                        height: 25,
+                                    }}>
+                                        <CircularProgress 
+                                        color="inherit"
+                                        size="1.5rem" 
+                                        />
+                                </Box> : 'Submit'
+                        }
+                </Button>
+                <Toasty 
+                    open={openToasty.open} 
+                    severity={openToasty.severity} 
+                    text={openToasty.text}
+                    onClose={() => setOpenToasty(openToasty.open = false)}
                 />
-            </Box>
-            <Button 
-                sx={{marginTop: 2}}
-                variant="contained" 
-                onClick={handleRegisterButton} 
-                disabled={isLoading}>
-                    {
-                    isLoading ? <Box 
-                                sx={{width: 54,
-                                     height: 25,
-                                }}>
-                                    <CircularProgress 
-                                    color="inherit"
-                                    size="1.5rem" 
-                                    />
-                              </Box> : 'Submit'
-                    }
-            </Button>
-            <Toasty 
-                open={openToasty.open} 
-                severity={openToasty.severity} 
-                text={openToasty.text}
-                onClose={() => setOpenToasty(openToasty.open = false)}/>
-        </>
+                <Box sx={{marginTop: 5, marginBottom: 5}} >
+                    <hr />
+                </Box>
+                <CustomersList />
+            </>
     )
 }
 

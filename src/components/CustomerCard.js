@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
 import classNames from 'classnames'
+import React, { useState } from 'react'
 
 import {
-    Card,
-    CardHeader,
-    CardActions,
     Avatar,
+    Card,
+    CardActions,
+    CardHeader,
     IconButton,
 } from '@mui/material'
 
-import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 
+import { deepPurple, grey } from '@mui/material/colors'
 import ModalConfirm from './ModalConfirm'
 
 
@@ -46,7 +47,7 @@ const CustomerCard = ({
    
     return (
         <>
-            <Card className={classNames(className)}>
+            <Card className={classNames(className)} sx={{background: deepPurple[700], color: 'white', boxShadow: 5}}>
                 <CardHeader
                     avatar={
                         <Avatar  aria-label="recipe" src={avatar}>
@@ -55,12 +56,33 @@ const CustomerCard = ({
                     }
                     title={`${name} ${lastname}`}
                     subheader={email}
+                    subheaderTypographyProps={{color: 'white'}}
                 />
                 <CardActions disableSpacing>
-                    <IconButton aria-label="edit customer" onClick={() => handleEditCustomer(id)}>
+                    <IconButton 
+                        sx={{
+                            color: 'white', 
+                                "&:hover": {
+                                    backgroundColor: deepPurple[900],
+                                    color: grey[200]
+                                } 
+                        }} 
+                        aria-label="edit customer" 
+                        onClick={() => handleEditCustomer(id)}
+                    >
                         <EditIcon />
                     </IconButton>
-                    <IconButton aria-label="remove customer" onClick={handleRemoveCustomer}>
+                    <IconButton 
+                        sx={{
+                            color: 'white', 
+                                "&:hover": {
+                                    backgroundColor: deepPurple[900],
+                                    color: grey[200]
+                                }
+                        }} 
+                        aria-label="remove customer"
+                        onClick={handleRemoveCustomer}
+                    >
                         <DeleteIcon />
                     </IconButton>
                 </CardActions>

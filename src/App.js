@@ -1,29 +1,28 @@
 import React from 'react'
-import { 
+import {
+  Route,
   BrowserRouter as Router,
   Switch,
-  Route,
 } from "react-router-dom"
 
 import TemplateDefault from './templates/Default'
 import TemplatePage from './templates/Page'
-import TemplateClean from './templates/Clean'
 
 
-import Home from './pages/Home'
+import CustomersEdit from './pages/customers/Edit'
 import CustomersList from './pages/customers/List'
 import CustomersRegister from './pages/customers/Register'
-import CustomersEdit from './pages/customers/Edit'
+import Home from './pages/Home'
 import Login from './pages/Login'
 
 function App() {
   return (
     <Router>
+            <TemplateDefault />
         <Switch>
-          <Route path="/login">
-            <TemplateClean title="Restrict Access" Component={Login} />
-          </Route>
-          <TemplateDefault>
+              <Route path="/login">
+                <TemplatePage title="Login" Component={Login} />
+              </Route>
               <Route path="/customers/edit/:id">
                 <TemplatePage title="Edit Customer" Component={CustomersEdit} />
               </Route>
@@ -36,7 +35,6 @@ function App() {
               <Route path="/">
                 <TemplatePage title="Home" Component={Home} />
               </Route>
-          </TemplateDefault>
         </Switch>
     </Router>
   )

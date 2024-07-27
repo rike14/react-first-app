@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
 import {
     AppBar,
     Box,
-    Toolbar,
-    Typography,
     Button,
-    IconButton,
     Drawer,
+    IconButton,
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
+    Toolbar,
+    Typography,
 } from '@mui/material'
+import React, { useState } from 'react'
 
 import { useHistory } from "react-router-dom"
 
-import MenuIcon from '@mui/icons-material/Menu'
 import HomeIcon from '@mui/icons-material/Home'
-import PersonIcon from '@mui/icons-material/Person';
+import MenuIcon from '@mui/icons-material/Menu'
+import PersonIcon from '@mui/icons-material/Person'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import './Header.css'
 
@@ -57,7 +57,7 @@ const Header = ({ user }) => {
                         {
                             user.logged
                             ? <Typography variant='h6'>{user.email}</Typography>
-                            : <Button color="inherit">Login</Button>
+                                : <Button onClick={() => history.push('/login')} color="inherit">Login</Button>
 
                         }
                     </Toolbar>
@@ -65,19 +65,19 @@ const Header = ({ user }) => {
             </Box>
             <Drawer open={menuOpen} onClose={() => handleToggleMenu()}>
                 <List>
-                    <ListItem button onClick={() => handleMenuClick('/')}>
+                    <ListItem onClick={() => handleMenuClick('/')}>
                         <ListItemIcon>
                             <HomeIcon/>
                         </ListItemIcon>
                         <ListItemText>Home</ListItemText>
                     </ListItem>
-                    <ListItem button onClick={() => handleMenuClick('/customers')} >
+                    <ListItem onClick={() => handleMenuClick('/customers')} >
                         <ListItemIcon>
                             <PersonIcon/>
                         </ListItemIcon>
                         <ListItemText>List Customers</ListItemText>
                     </ListItem>
-                    <ListItem button onClick={() => handleMenuClick('/customers/add')} >
+                    <ListItem onClick={() => handleMenuClick('/customers/add')} >
                         <ListItemIcon>
                             <PersonAddIcon/>
                         </ListItemIcon>

@@ -1,17 +1,11 @@
+import { Box, Button, Skeleton, TextField } from "@mui/material"
 import { useState } from "react"
-import { Button, TextField, Typography } from "@mui/material"
-import { makeStyles } from "@mui/styles"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import useAuth from "../state/auth"
 
-const useStyles = makeStyles((theme) => ({
-    wrapper: {
-        margin: theme.spacing(3),
-    }
-}))
+
 
 const Login = () => {
-    const classes = useStyles()
     const history = useHistory()
 
     const [form, setForm] = useState({
@@ -47,32 +41,48 @@ const Login = () => {
     }
 
     return (
-        <>
-           <Typography variant="h3" >Restrict Access</Typography>
-
-           <div className={classes.wrapper}>
-                <TextField
-                    onChange={handleInputChange}
-                    label="Digit your e-mail"
-                    name="email"
-                />
-           </div>
-           <div className={classes.wrapper}>
-                <TextField
-                    onChange={handleInputChange}
-                    label="Digit your password"
-                    name="password"
-                    type="password"
-                />
-           </div>
-           <div className={classes.wrapper}>
-                <Button variant="contained" color="primary" onClick={handleFormSubmit}>
-                   {
-                    isLoading ? 'Loading...' : 'Enter'
-                   }
-                </Button>
-           </div>
-        </>
+        isLoading ? 
+            <Box>
+                <Skeleton variant="rectangular" height={100} width="15%" style={{marginTop: 15}} />
+                <Skeleton animation="wave" height={80} width="15%" />
+            </Box>
+            :
+            <>
+                <Box component="form"
+                    sx={{
+                        marginTop: 2,
+                    }}
+                    autoComplete="off">
+                    <TextField
+                        onChange={handleInputChange}
+                        label="Digit your e-mail"
+                        name="email"
+                    />
+            </Box>
+                <Box component="form"
+                    sx={{
+                        marginTop: 2,
+                    }}
+                    autoComplete="off">
+                    <TextField
+                        onChange={handleInputChange}
+                        label="Digit your password"
+                        name="password"
+                        type="password"
+                    />
+            </Box>
+                <Box component="form"
+                    sx={{
+                        marginTop: 2,
+                    }}
+                    autoComplete="off">
+                    <Button variant="contained" color="primary" onClick={handleFormSubmit}>
+                    {
+                        isLoading ? 'Loading...' : 'Enter'
+                    }
+                    </Button>
+            </Box>
+            </>
     )
 }
 export default Login
